@@ -1,0 +1,37 @@
+{
+  "name": "Json Dump Bot",
+  "description": "bot returns Telegram MtProto meta-data for all sent messages",
+  "keywords": [],
+  "success_url": "https://telegram.dog/PyroGramSnippets",
+  "website": "https://github.com/SpEcHiDe/PyroJsonDumpBot",
+  "repository": "https://github.com/SpEcHiDe/PyroJsonDumpBot",
+  "env": {
+    "WEBHOOK": {
+      "description": "Setting this to ANYTHING will enable webhooks when in env mode",
+      "value": "ANYTHING"
+    },
+    "TG_BOT_TOKEN": {
+      "description": "Your bot token, from @BotFather, as a string.",
+      "value": ""
+    },
+    "APP_ID": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": ""
+    },
+    "API_HASH": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": ""
+    }
+  },
+  "addons": [
+  ],
+  "buildpacks": [{
+    "url": "heroku/python"
+  }],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
