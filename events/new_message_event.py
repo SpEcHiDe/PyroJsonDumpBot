@@ -15,6 +15,10 @@ import os
 import time
 from pyrogram import Client
 from pyrobot import TMP_DOWNLOAD_DIRECTORY
+from pyrogram.errors import (
+    PeerIdInvalid,
+    UserIsBlocked
+)
 
 
 @Client.on_message()
@@ -26,6 +30,8 @@ async def new_message_event(client, message):
             disable_web_page_preview=True,
             disable_notification=True,
         )
+    except (PeerIdInvalid, UserIsBlocked):
+        pass
     except Exception as e:
         work_area = os.path.join(
             TMP_DOWNLOAD_DIRECTORY,
