@@ -13,8 +13,11 @@ LOGGER = logging.getLogger(__name__)
 
 import os
 import time
+from pyrogram import Client
+from pyrobot import TMP_DOWNLOAD_DIRECTORY
 
 
+@Client.on_message()
 async def new_message_event(client, message):
     try:
         await message.reply_text(
@@ -25,7 +28,7 @@ async def new_message_event(client, message):
         )
     except Exception as e:
         work_area = os.path.join(
-            Config.TMP_DOWNLOAD_DIRECTORY,
+            TMP_DOWNLOAD_DIRECTORY,
             str(time.time())
         )
         # create download directory, if not exist

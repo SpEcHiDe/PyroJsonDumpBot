@@ -11,31 +11,26 @@ logging.basicConfig(
 LOGGER = logging.getLogger(__name__)
 
 
-import os
-
-
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from pyrobot import (
+    TG_BOT_TOKEN,
+    APP_ID,
+    API_HASH
+)
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
-from events.new_message_event import new_message_event
-
-
 if __name__ == "__main__":
-    # create download directory, if not exist
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
+    plugins = dict(
+        root="events",
+    )
     app = pyrogram.Client(
         "PyroJsonDumpBot",
         bot_token=Config.TG_BOT_TOKEN,
         api_id=Config.APP_ID,
-        api_hash=Config.API_HASH
+        api_hash=Config.API_HASH,
+        plugins=plugins
     )
     app.add_handler(pyrogram.MessageHandler(new_message_event))
     app.run()
