@@ -27,10 +27,10 @@ if __name__ == "__main__":
     )
     app = pyrogram.Client(
         "PyroJsonDumpBot",
-        bot_token=Config.TG_BOT_TOKEN,
-        api_id=Config.APP_ID,
-        api_hash=Config.API_HASH,
+        bot_token=TG_BOT_TOKEN,
+        api_id=APP_ID,
+        api_hash=API_HASH,
         plugins=plugins
     )
-    app.add_handler(pyrogram.MessageHandler(new_message_event))
+    #
     app.run()

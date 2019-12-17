@@ -18,12 +18,12 @@ virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
 # <Create config.py appropriately>
-python3 robot.py
+python3 -m pyrobot
 ```
 
 ### an example config.py 👇
 ```py
-from sample_config import Config
+from pyrobot.sample_config import Config
 
 class Config(Config):
   TG_BOT_TOKEN = ""
