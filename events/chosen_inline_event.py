@@ -2,19 +2,10 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
 
-# the logging things
-import logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-LOGGER = logging.getLogger(__name__)
 
-
-import os
-import time
+from io import BytesIO
 from pyrogram import Client
-from pyrobot import TMP_DOWNLOAD_DIRECTORY
+from pyrobot import LOGGER
 from pyrogram.errors import (
     PeerIdInvalid,
     UserIsBlocked
@@ -38,23 +29,11 @@ async def chosen_inline_result(client, inline_query):
         pass
     except Exception as e:
         LOGGER.info(str(e))
-        work_area = os.path.join(
-            TMP_DOWNLOAD_DIRECTORY,
-            str(time.time())
-        )
-        # create download directory, if not exist
-        if not os.path.isdir(work_area):
-            os.makedirs(work_area)
-        temp_writing_file = os.path.join(
-            work_area,
-            "json.text"
-        )
-        with open(temp_writing_file, "w+", encoding="utf8") as out_file:
-            out_file.write(str(inline_query))
-        await client.send_document(
-            chat_id=inline_query.from_user.id,
-            document=temp_writing_file,
-            caption=str(e),
-            disable_notification=True,
-        )
-        os.remove(temp_writing_file)
+        with BytesIO(str.encode(str(inline_query))) as out_file:
+            out_file.name = "json.text"
+            await client.send_document(
+                chat_id=inline_query.from_user.id,
+                document=out_file,
+                caption=str(e),
+                disable_notification=True,
+            )

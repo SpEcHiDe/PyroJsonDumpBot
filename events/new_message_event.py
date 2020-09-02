@@ -2,19 +2,10 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
 
-# the logging things
-import logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-LOGGER = logging.getLogger(__name__)
 
-
-import os
-import time
+from io import BytesIO
 from pyrogram import Client
-from pyrobot import TMP_DOWNLOAD_DIRECTORY
+from pyrobot import LOGGER
 from pyrogram.errors import (
     PeerIdInvalid,
     UserIsBlocked
@@ -33,23 +24,12 @@ async def new_message_event(client, message):
     except (PeerIdInvalid, UserIsBlocked):
         pass
     except Exception as e:
-        work_area = os.path.join(
-            TMP_DOWNLOAD_DIRECTORY,
-            str(time.time())
-        )
-        # create download directory, if not exist
-        if not os.path.isdir(work_area):
-            os.makedirs(work_area)
-        temp_writing_file = os.path.join(
-            work_area,
-            "json.text"
-        )
-        with open(temp_writing_file, "w+", encoding="utf8") as out_file:
-            out_file.write(str(message))
-        await message.reply_document(
-            document=temp_writing_file,
-            caption=str(e),
-            disable_notification=True,
-            quote=True
-        )
-        os.remove(temp_writing_file)
+        LOGGER.info(str(e))
+        with BytesIO(str.encode(str(message))) as out_file:
+            out_file.name = "json.text"
+            await message.reply_document(
+                document=out_file,
+                caption=str(e),
+                disable_notification=True,
+                quote=True
+            )
