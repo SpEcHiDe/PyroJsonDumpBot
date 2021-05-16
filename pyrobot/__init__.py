@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
-
 # the logging things
 import logging
 
@@ -14,12 +10,7 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
-
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from pyrobot.sample_config import Config
-else:
-    from pyrobot.config import Config
+from pyrobot.sample_config import Config
 
 
 # TODO: is there a better way?

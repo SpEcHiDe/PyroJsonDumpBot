@@ -1,14 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
-
-
 from io import BytesIO
 from pyrogram import Client
 from pyrobot import LOGGER
 from pyrogram.errors import (
     PeerIdInvalid,
-    UserIsBlocked
+    UserIsBlocked,
+    MessageTooLong
 )
 
 
@@ -34,8 +30,7 @@ async def new_inline_query(client, inline_query):
             switch_pm_parameter="bot_not_started"
         )
         return False
-    except Exception as e:
-        LOGGER.info(str(e))
+    except MessageTooLong:
         with BytesIO(str.encode(str(inline_query))) as out_file:
             out_file.name = "json.text"
             await client.send_document(

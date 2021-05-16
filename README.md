@@ -17,19 +17,10 @@ cd PyroJsonDumpBot
 python3 -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
-# <Create config.py appropriately>
+export APP_ID=6 API_HASH="eb06d4abfb49dc3eeb1aeb98ae0f581e" TG_BOT_TOKEN="93372553:AAFNrcXeRFJGIaSsQA4wf81JX7TgQZQJmzI"
 python3 -m pyrobot
 ```
 
-### an example config.py 👇
-```py
-from pyrobot.sample_config import Config
-
-class Config(Config):
-  TG_BOT_TOKEN = ""
-  APP_ID = 6
-  API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-```
 
 ### Variable Explanations
 
@@ -41,10 +32,6 @@ class Config(Config):
 * `API_HASH`: Get these two values from [my.telegram.org/apps](https://my.telegram.org/apps).
   * N.B.: if Telegram is blocked by your ISP, try our [Telegram bot](https://telegram.dog/UseTGXBot) to get the IDs.
 
-
-##### Optional Configuration Variables
-
-* `TMP_DOWNLOAD_DIRECTORY`
 
 ## Credits, and Thanks to
 
