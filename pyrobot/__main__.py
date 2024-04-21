@@ -1,6 +1,7 @@
 from pyrogram import (
     Client
 )
+from pyrogram.enums import ParseMode
 from pyrobot import (
     APP_ID,
     API_HASH,
@@ -18,7 +19,6 @@ if __name__ == "__main__":
         api_id=APP_ID,
         api_hash=API_HASH,
         plugins=plugins,
-        parse_mode="html"
+        parse_mode=ParseMode.HTML
     )
-    #
     app.run()

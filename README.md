@@ -4,12 +4,7 @@ A Telegram robot based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
 ## installing
 
-### The Easy Way
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-### The Legacy Way
-Simply clone the repository and run the main file:
+Clone the repository and run the main file:
 
 ```sh
 git clone https://github.com/SpEcHiDe/PyroJsonDumpBot.git

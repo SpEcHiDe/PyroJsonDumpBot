@@ -14,7 +14,6 @@ async def chosen_inline_result(client, inline_query):
         await client.send_message(
             chat_id=inline_query.from_user.id,
             text=f"<code>{inline_query}</code>",
-            # parse_mode=,
             disable_web_page_preview=True,
             disable_notification=True,
             # reply_to_message_id=,
